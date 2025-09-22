@@ -1,0 +1,7 @@
+name=Slime Ascension
+author=uguu.org
+description=Keep climbing up!
+bundleID=org.uguu.SlimeAscension
+version=0.2
+buildNumber=2
+imagePath=launcher/
