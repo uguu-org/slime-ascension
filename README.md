@@ -6,7 +6,7 @@ https://uguu-org.itch.io/slime-ascension
 
 Created for [PlayJam 8](https://itch.io/jam/playjam-8) "Ascension".
 
-![](doc/demo.mp4)
+![](doc/demo.gif)
 
 ## Controls
 
