@@ -64,7 +64,7 @@ function check_output
 #   0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0 0
 pgmmake 0 25 20 > "$TEST_DIR/z.pgm"
 pnmtopng -alpha="$TEST_DIR/z.pgm" "$TEST_DIR/z.pgm" > "$TEST_DIR/blank.png"
-convert \
+magick \
    "$TEST_DIR/blank.png" \
    -fill "xc:#010101" -draw "rectangle 1,1 3,2" \
    -fill "xc:#020202" -draw "rectangle 6,1 8,2" \
@@ -83,35 +83,35 @@ cp "$TEST_DIR/input.png" "$TEST_DIR/expected.png"
 check_output "$LINENO: multi-tile no-op"
 
 # Try cropping the image as one single tile.
-convert "$TEST_DIR/input.png" -crop "25x19+0+0" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "25x19+0+0" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 25 19 0 0 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile bottom edge 1"
 
-convert "$TEST_DIR/input.png" -crop "25x18+0+0" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "25x18+0+0" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 25 18 0 0 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile bottom edge 2"
 
-convert "$TEST_DIR/input.png" -crop "24x20+0+0" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "24x20+0+0" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 24 20 0 0 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile right edge 1"
 
-convert "$TEST_DIR/input.png" -crop "23x20+0+0" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "23x20+0+0" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 23 20 0 0 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile right edge 2"
 
-convert "$TEST_DIR/input.png" -crop "25x19+0+1" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "25x19+0+1" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 25 19 0 1 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile top edge 1"
 
-convert "$TEST_DIR/input.png" -crop "25x18+0+2" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "25x18+0+2" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 25 18 0 2 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile top edge 2"
 
-convert "$TEST_DIR/input.png" -crop "24x20+1+0" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "24x20+1+0" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 24 20 1 0 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile left edge 1"
 
-convert "$TEST_DIR/input.png" -crop "23x20+2+0" "$TEST_DIR/expected.png"
+magick "$TEST_DIR/input.png" -crop "23x20+2+0" "$TEST_DIR/expected.png"
 "./$TOOL" 25 20 23 20 2 0 < "$TEST_DIR/input.png" > "$TEST_DIR/actual.png"
 check_output "$LINENO: single tile left edge 2"
 
@@ -141,7 +141,7 @@ check_output "$LINENO: single tile left edge 2"
 #   - 0 0 0 -  - 0 0 0 -  - 3 3 3 -  - 4 4 4 -  - 5 5 5 -   # y=8
 #   - 0 0 0 -  - 0 0 0 -  - 3 3 3 -  - 4 4 4 -  - 5 5 5 -
 #   - - - - -  - - - - -  - - - - -  - - - - -  - - - - -
-convert \
+magick \
    "(" "$TEST_DIR/blank.png" -crop "15x10+0+0" ")" \
    -fill "xc:#010101" -draw "rectangle 0,0 2,1" \
    -fill "xc:#020202" -draw "rectangle 3,0 5,1" \
@@ -179,7 +179,7 @@ check_output "$LINENO: all edges"
 #   - - 0 0 0  - - 0 0 0  - - 3 3 0  - - 4 4 0  - - 5 5 0   # y=4
 #   - - - - -  - - - - -  - - - - -  - - - - -  - - - - -
 #   - - - - -  - - - - -  - - - - -  - - - - -  - - - - -
-convert \
+magick \
    "(" "$TEST_DIR/blank.png" -crop "15x5+0+0" ")" \
    -fill "xc:#010101" -draw "rectangle 0,0 1,0" \
    -fill "xc:#020202" -draw "rectangle 3,0 4,0" \

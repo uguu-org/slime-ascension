@@ -53,7 +53,7 @@ function run_test
 # 0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
 pgmmake 0 16 8 > "$TEST_DIR/z.pgm"
 pnmtopng -alpha="$TEST_DIR/z.pgm" "$TEST_DIR/z.pgm" > "$TEST_DIR/blank.png"
-convert \
+magick \
    "$TEST_DIR/blank.png" \
    -fill "xc:#010101" -draw "rectangle 1,1 2,2" \
    -fill "xc:#020202" -draw "rectangle 5,2 6,2" \
@@ -77,7 +77,7 @@ run_test $LINENO  4 4   2 2 1 1
 # 0 0 0 0 0  0 0 0 0 0  0 0 0 0 0
 # 0 0 0 0 0  0 0 0 0 3  0 0 0 0 0
 # 0 0 0 0 0  0 0 0 0 0  0 0 0 4 0
-convert \
+magick \
    "(" "$TEST_DIR/blank.png" -crop "15x6+0+0" ")" \
    -fill "xc:#010101" -draw "rectangle 3,1 4,1" \
    -fill "xc:#020202" -draw "rectangle 8,2 9,2" \

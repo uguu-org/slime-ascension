@@ -120,7 +120,7 @@ fi
 if [[ $# -eq 6 && -s "$FULL_PAGE_CACHE" ]]; then
    WIDTH=$(($X2 - $X1))
    HEIGHT=$(($Y2 - $Y1))
-   convert \
+   magick \
       "$FULL_PAGE_CACHE" \
       -crop "${WIDTH}x${HEIGHT}+${X1}+${Y1}" \
       "$CACHED_OUTPUT"

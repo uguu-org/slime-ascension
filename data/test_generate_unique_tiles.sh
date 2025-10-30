@@ -30,26 +30,26 @@ function die
    && die "$LINENO: read error"
 cat /dev/null | "$TOOL" - /dev/null /dev/null > /dev/null 2>&1 \
    && die "$LINENO: read error"
-convert -size 64x64 xc:"rgba(0,0,0,0)" png:- \
+magick -size 64x64 xc:"rgba(0,0,0,0)" png:- \
    | perl -e '$d = join "", <>; $d =~ s/^(.*IDAT.).*$/$1/s; print $d;' \
    | "$TOOL" - /dev/null /dev/null > /dev/null 2>&1 \
    && die "$LINENO: read error"
 
 # Check input sizes.
-convert -size 1x64 xc:"rgba(0,0,0,0)" $IMAGE_FORMAT png:- \
+magick -size 1x64 xc:"rgba(0,0,0,0)" $IMAGE_FORMAT png:- \
    | "$TOOL" - /dev/null /dev/null > /dev/null 2>&1 \
    && die "$LINENO: input width check"
-convert -size 64x1 xc:"rgba(0,0,0,0)" $IMAGE_FORMAT png:- \
+magick -size 64x1 xc:"rgba(0,0,0,0)" $IMAGE_FORMAT png:- \
    | "$TOOL" - /dev/null /dev/null > /dev/null 2>&1 \
    && die "$LINENO: input height check"
 
 # Check transparent input.
-convert -size 64x64 xc:"rgba(0,0,0,0)" $IMAGE_FORMAT png:- \
+magick -size 64x64 xc:"rgba(0,0,0,0)" $IMAGE_FORMAT png:- \
    | "$TOOL" - /dev/null /dev/null > /dev/null 2>&1 \
    && die "$LINENO: transparent input"
 
 # Input with all unique tiles.
-convert \
+magick \
    -size 64x16 xc:"rgba(0,0,0,0)" \
    $IMAGE_FORMAT \
    -fill white -draw "rectangle 1,1 2,2" \
@@ -60,7 +60,7 @@ convert \
 "$TOOL" "$TEST_ROOT/input.png" "$TEST_ROOT/output.png" "$TEST_ROOT/output.txt" \
    || die "$LINENO: unique tiles"
 
-convert \
+magick \
    -size 1024x16 xc:"rgba(0,0,0,0)" \
    $IMAGE_FORMAT \
    "$TEST_ROOT/input.png" -composite \
@@ -83,7 +83,7 @@ diff "$TEST_ROOT/expected.txt" "$TEST_ROOT/output.txt" \
    || die "$LINENO: unique tiles indices mismatched"
 
 # Input with a transparent tile and two sets of duplicate tiles.
-convert \
+magick \
    -size 80x32 xc:"rgba(0,0,0,0)" \
    $IMAGE_FORMAT \
    -fill white -draw "rectangle 1,1 2,3" \
@@ -94,7 +94,7 @@ convert \
 "$TOOL" "$TEST_ROOT/input.png" "$TEST_ROOT/output.png" "$TEST_ROOT/output.txt" \
    || die "$LINENO: duplicate tiles"
 
-convert \
+magick \
    -size 1024x16 xc:"rgba(0,0,0,0)" \
    $IMAGE_FORMAT \
    -fill white -draw "rectangle 1,1 2,3" \

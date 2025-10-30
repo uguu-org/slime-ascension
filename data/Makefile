@@ -84,21 +84,21 @@ $(BUILD_DIR)/t_world.png: $(BUILD_DIR)/t_world.svg svg_to_png.sh | make_build_di
 
 # Slime images.
 $(BUILD_DIR)/t_body.png: $(BUILD_DIR)/t_world.png $(BUILD_DIR)/dither.exe
-	convert $< -depth 8 -colorspace Gray +repage -crop 64x512+0+0 png:- | $(BUILD_DIR)/dither.exe - $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 64x512+0+0 png:- | $(BUILD_DIR)/dither.exe - $@
 
 $(BUILD_DIR)/t_eyes.png: $(BUILD_DIR)/t_world.png $(BUILD_DIR)/dither.exe
-	convert $< -depth 8 -colorspace Gray +repage -crop 12x444+64+0 png:- | $(BUILD_DIR)/dither.exe - $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 12x444+64+0 png:- | $(BUILD_DIR)/dither.exe - $@
 
 # Falling meteor.
 $(BUILD_DIR)/t_meteor.png: $(BUILD_DIR)/t_world.png $(BUILD_DIR)/fs_dither.exe
-	convert $< -depth 8 -colorspace Gray +repage -crop 64x1152+128+0 png:- | $(BUILD_DIR)/fs_dither.exe - $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 64x1152+128+0 png:- | $(BUILD_DIR)/fs_dither.exe - $@
 
 # Platform images.
 $(BUILD_DIR)/t_platform.png: $(BUILD_DIR)/t_platform_gray.png $(BUILD_DIR)/fs_dither.exe
 	$(BUILD_DIR)/fs_dither.exe $< $@
 
 $(BUILD_DIR)/t_platform_gray.png: $(BUILD_DIR)/t_platform0.png $(BUILD_DIR)/t_platform1.png $(BUILD_DIR)/t_platform2.png $(BUILD_DIR)/t_platform3.png $(BUILD_DIR)/t_platform4.png $(BUILD_DIR)/t_platform5.png
-	convert -size 1152x960 xc:"rgba(0,0,0,0)" -depth 8 -colorspace Gray \
+	magick -size 1152x960 xc:"rgba(0,0,0,0)" -depth 8 -colorspace Gray \
 	'(' $(BUILD_DIR)/t_platform0.png +repage -geometry +0+0 ')' -composite \
 	'(' $(BUILD_DIR)/t_platform1.png +repage -geometry +192+0 ')' -composite \
 	'(' $(BUILD_DIR)/t_platform2.png +repage -geometry +384+0 ')' -composite \
@@ -108,47 +108,47 @@ $(BUILD_DIR)/t_platform_gray.png: $(BUILD_DIR)/t_platform0.png $(BUILD_DIR)/t_pl
 	$@
 
 $(BUILD_DIR)/t_platform0.png: $(BUILD_DIR)/t_world.png
-	convert $< -depth 8 -colorspace Gray +repage -crop 192x960+288+0 $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 192x960+288+0 $@
 
 $(BUILD_DIR)/t_platform1.png: $(BUILD_DIR)/t_world.png
-	convert $< -depth 8 -colorspace Gray +repage -crop 192x960+512+0 $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 192x960+512+0 $@
 
 $(BUILD_DIR)/t_platform2.png: $(BUILD_DIR)/t_world.png
-	convert $< -depth 8 -colorspace Gray +repage -crop 160x960+736+0 $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 160x960+736+0 $@
 
 $(BUILD_DIR)/t_platform3.png: $(BUILD_DIR)/t_world.png
-	convert $< -depth 8 -colorspace Gray +repage -crop 160x960+928+0 $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 160x960+928+0 $@
 
 $(BUILD_DIR)/t_platform4.png: $(BUILD_DIR)/t_world.png
-	convert $< -depth 8 -colorspace Gray +repage -crop 128x960+1120+0 $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 128x960+1120+0 $@
 
 $(BUILD_DIR)/t_platform5.png: $(BUILD_DIR)/t_world.png
-	convert $< -depth 8 -colorspace Gray +repage -crop 128x960+1280+0 $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 128x960+1280+0 $@
 
 # Spring.
 $(BUILD_DIR)/t_spring.png: $(BUILD_DIR)/t_world.png $(BUILD_DIR)/dither.exe
-	convert $< -depth 8 -colorspace Gray +repage -crop 32x96+64+512 png:- | $(BUILD_DIR)/dither.exe - $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 32x96+64+512 png:- | $(BUILD_DIR)/dither.exe - $@
 
 # Title logo.
 $(BUILD_DIR)/t_title.png: $(BUILD_DIR)/t_title_gray.png $(BUILD_DIR)/dither.exe
 	$(BUILD_DIR)/dither.exe $< $@
 
 $(BUILD_DIR)/t_title_gray.png: $(BUILD_DIR)/t_world.png
-	convert $< -depth 8 -colorspace Gray +repage -crop 336x48+288+976 $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 336x48+288+976 $@
 
 # Launcher card.
 $(BUILD_DIR)/t_card.png: $(BUILD_DIR)/t_card_bg.png $(BUILD_DIR)/t_card_fg.png
-	convert $(BUILD_DIR)/t_card_bg.png '(' $(BUILD_DIR)/t_card_fg.png +repage -geometry +0+0 ')' -composite $@
+	magick $(BUILD_DIR)/t_card_bg.png '(' $(BUILD_DIR)/t_card_fg.png +repage -geometry +0+0 ')' -composite $@
 
 $(BUILD_DIR)/t_card_fg.png: $(BUILD_DIR)/t_world.png $(BUILD_DIR)/fs_dither.exe
-	convert $< -depth 8 -colorspace Gray +repage -crop 350x155+256+1072 png:- | $(BUILD_DIR)/fs_dither.exe - $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 350x155+256+1072 png:- | $(BUILD_DIR)/fs_dither.exe - $@
 
 $(BUILD_DIR)/t_card_bg.png: $(BUILD_DIR)/t_world.png $(BUILD_DIR)/dither.exe
-	convert $< -depth 8 -colorspace Gray +repage -crop 350x155+256+1584 png:- | $(BUILD_DIR)/dither.exe - $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 350x155+256+1584 png:- | $(BUILD_DIR)/dither.exe - $@
 
 # Launcher icon.
 $(BUILD_DIR)/t_icon.png: $(BUILD_DIR)/t_world.png $(BUILD_DIR)/dither.exe
-	convert $< -depth 8 -colorspace Gray +repage -crop 32x32+0+544 png:- | $(BUILD_DIR)/dither.exe - $@
+	magick $< -depth 8 -colorspace Gray +repage -crop 32x32+0+544 png:- | $(BUILD_DIR)/dither.exe - $@
 
 # itch.io cover.
 $(BUILD_DIR)/t_itch_cover.png: $(BUILD_DIR)/t_world.svg $(BUILD_DIR)/t_aa_svg_to_png.sh
